@@ -14,6 +14,6 @@ export class AppController {
 
   @Get('/author')
   getAuthor(): string {
-    return this.appService.getHello();
+    return this.appService.getAuthor();
   }
 }
