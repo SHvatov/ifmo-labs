@@ -138,6 +138,55 @@
       </div>
 
       <div class='accordion-item'>
+        <h2 class='accordion-header' id='headingFour'>
+          <button aria-controls='collapseFour' aria-expanded='true' class='accordion-button'
+                  data-bs-target='#collapseFour' data-bs-toggle='collapse' type='button'>
+            Лабораторная работа №4 - Рекурсивные функции
+          </button>
+        </h2>
+        <div aria-labelledby='headingFour' class='accordion-collapse collapse show' data-bs-parent='#taskAccordion'
+             id='collapseFour'>
+          <div class='accordion-body'>
+            <div class='card'>
+              <div class='card-body'>
+                <h6 class='card-subtitle mb-2'>Результаты исследования</h6>
+                <a class='card-link' href='https://kodaktor.ru/func_007'>Cсылка на задание</a>
+                <p class='card-text'>
+                  Значения параметров, при которых возможо переполнение стека вызовов зависит от того,
+                  как именно будет определена функция pwr, а именно ее граничное условие.
+                  <br>
+                  <br>
+                  <b>Вариант №1</b>
+                  <br>
+                <pre><code class='language-js'>const pwr = (a, b) => (b === 1) ? a : mpy(a, pwr(a, b - 1));</code></pre>
+                В данном случае, переполнение стека происходит при любых значениях параметра <code>b < 1</code>,
+                так как граничное условие в таком случае не срабатывает, и происходит вызов
+                <code>pwr(N, 1) -> pwr(N, 0) -> pwr(N, -1) -> ...</code>. На локальной машине переполнение стека
+                происходит при значении аргумента <code>b = -8373</code>.
+                При этом поток выполнения никогда не доходит до других функций.
+                <br>
+                <br>
+                <b>Вариант №2</b>
+                <br>
+                <pre><code class='language-js'>const pwr = (a, b) => (b === 1) ? a : (b === 0 ? 1 : mpy(a, pwr(a, b - 1)));</code></pre>
+                В данном случае предусмотрен вариант, когда значение <code>b == 0</code>,
+                но переполнение стека все равно происходит при любых значениях параметра <code>b < 0</code>,
+                так как граничное условие в таком случае не срабатывает, и происходит вызов
+                <code>pwr(N, -1) -> pwr(N, -2) -> pwr(N, -3) -> ...</code>.
+                <br>
+                <br>
+                В обоих случаях также возникает переполнение стека если вызвать функцию с отрицательным или нулевым
+                значением аргумента <code>a</code>. Рассмотри в качестве примера вызов <code>pwr(-2, 2)</code>.
+                Стек вызова будет следующим:
+                <code>pwr -2 2 -> pwr -2 1 -> mpy -2 -2 -> mpy -2 -3 -> mpy -2 -4 -> ...</code>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='accordion-item'>
         <h2 class='accordion-header' id='headingTemp'>
           <button aria-controls='collapseTemp' aria-expanded='true' class='accordion-button'
                   data-bs-target='#collapseTemp' data-bs-toggle='collapse' type='button'>
