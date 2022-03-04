@@ -16,4 +16,9 @@ export class AppController {
   getAuthor(): string {
     return this.appService.getAuthor();
   }
+
+  @Get('/proto')
+  getProtoChain(): String {
+    return this.appService.getProtoChain();
+  }
 }
