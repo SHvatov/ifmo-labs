@@ -24,32 +24,32 @@
       <tbody>
       <tr>
         <td style='width: 15%'>
-          <input aria-label='X1 coefficient' class='form-control' id='n1' type='text'>
+          <input aria-label='X1 coefficient' class='form-control' value = "2" id='n1' type='text'>
         </td>
         <td> * x</td>
         <td> +</td>
         <td style='width: 15%'>
-          <input aria-label='Y1 coefficient' class='form-control' id='n3' type='text'>
+          <input aria-label='Y1 coefficient' class='form-control' value = "3" id='n2' type='text'>
         </td>
         <td> * y</td>
         <td> =</td>
         <td style='width: 15%'>
-          <input aria-label='b1 coefficient' class='form-control' id='n5' type='text'>
+          <input aria-label='b1 coefficient' class='form-control' value = "18" id='n3' type='text'>
         </td>
       </tr>
       <tr>
         <td style='width: 15%'>
-          <input aria-label='X2 coefficient' class='form-control' id='n2' type='text'>
+          <input aria-label='X2 coefficient' class='form-control' value = "4" id='n4' type='text'>
         </td>
         <td> * x</td>
         <td> +</td>
         <td style='width: 15%'>
-          <input aria-label='Y2 coefficient' class='form-control' id='n4' type='text'>
+          <input aria-label='Y2 coefficient' class='form-control' value = "-5" id='n5' type='text'>
         </td>
         <td> * y</td>
         <td> =</td>
         <td style='width: 15%'>
-          <input aria-label='b2 coefficient' class='form-control' id='n6' type='text'>
+          <input aria-label='b2 coefficient' class='form-control' value = "-8" id='n6' type='text'>
         </td>
       </tr>
       </tbody>
@@ -58,7 +58,7 @@
 
   <div class='row'>
     <div class='col-sm-12'>
-      <button class='btn btn-primary' onclick='solveSystem()' style='width: 25%' type='button'>
+      <button class='btn btn-primary' onclick='solveSystem()' style='width: 25%' type='button' id='bt'>
         Решить!
       </button>
     </div>
@@ -75,10 +75,10 @@
       <tbody>
       <tr>
         <td>
-          <input aria-label='X' class='form-control' id='result1' readonly type='text'>
+          <input aria-label='X' class='form-control' id='result1' value = "" readonly type='text'>
         </td>
         <td>
-          <input aria-label='Y' class='form-control' id='result2' readonly type='text'>
+          <input aria-label='Y' class='form-control' id='result2'value = "" readonly type='text'>
         </td>
       </tr>
       </tbody>
@@ -89,13 +89,13 @@
 <script>
   function solveSystem() {
     let A = math.matrix([
-      [parseFloat($('#n1').val()), parseFloat($('#n3').val())],
-      [parseFloat($('#n2').val()), parseFloat($('#n4').val())],
+      [parseFloat($('#n1').val()), parseFloat($('#n2').val())],
+      [parseFloat($('#n4').val()), parseFloat($('#n5').val())],
     ]);
     console.log(A);
 
     let b = math.matrix([
-      [parseFloat($('#n5').val())],
+      [parseFloat($('#n3').val())],
       [parseFloat($('#n6').val())],
     ]);
     console.log(b);
