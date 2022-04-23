@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <meta content='noindex, nofollow' name='robots'>
+  <style type='text/css'>
+      #motion-circle {
+          offset-path: path("M 50 0 A 1 1 0 0 0 50 100 A 1 1 0 0 0 50 0");
+          animation: move 3000ms infinite alternate ease-in-out;
+          width: 40px;
+          height: 40px;
+      }
+
+      #stop-motion-circle {
+          offset-path: path("M 50 0");
+          animation: move 3000ms infinite alternate ease-in-out;
+          width: 40px;
+          height: 40px;
+      }
+
+      @keyframes move {
+          0% {
+              offset-distance: 0;
+          }
+          100% {
+              offset-distance: 100%;
+          }
+      }
+
+      body, html {
+          margin: 0;
+          zoom: 200%
+      }
+  </style>
+
+  <script>
+    function applyToElement(id, fun) {
+      let element = document.getElementById(id);
+      if (element !== null) {
+        fun(element);
+        return true;
+      }
+      return false;
+    }
+
+    function changeStyle() {
+      if (applyToElement('stop-motion-circle', el => el.setAttribute('id', 'motion-circle'))) {
+        return;
+      }
+
+      if (applyToElement('motion-circle', el => el.setAttribute('id', 'stop-motion-circle'))) {
+        return;
+      }
+
+      alert('Could not find element to animate!');
+    }
+  </script>
+  <title>Khvatov S.A., Animation basics</title>
+</head>
+
+<body>
+<div style='width: 100px; height: 200px; position: absolute;'>
+  <div style='background: red; width: 100px; height: 100px; '></div>
+  <div id='goss'
+       style='border-radius: 50%; border: solid 1px black; background: green; width: 98px; height: 98px; margin-top: -100px;'></div>
+  <div id='stop-motion-circle'
+       style='border-radius: 50%; border: solid 1px black; background: rgb(196, 171, 32); width: 10px; height: 10px; margin-top: -100px;'></div>
+  <button onclick='changeStyle()' style='margin-top: 100px;'>Нажмите для анимации!</button>
+</div>
+<div>
+
+</div>
+</body>
+
+</html>
