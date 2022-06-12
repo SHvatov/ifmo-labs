@@ -1,4 +1,4 @@
-import { Controller, Get, Redirect } from '@nestjs/common';
+import { Controller, Get, Query, Redirect } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -20,5 +20,21 @@ export class AppController {
   @Get('/proto')
   getProtoChain(): String {
     return this.appService.getProtoChain();
+  }
+
+  @Get('/simple?')
+  getSimplesPage(@Query() query: JSON): string {
+    let n = parseInt(Object.keys(query)[0]);
+    let simpleNumbers = this.appService.getSimples(n);
+    return `
+      <html lang='ru'>
+        <head>
+          <title>${simpleNumbers}</title>
+        </head>
+        <body>
+          <h4>shvatov</h4>
+        </body>
+      </html>
+    `;
   }
 }

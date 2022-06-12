@@ -20,6 +20,7 @@ lerna-debug.log*
 
 # IDEs and editors
 /.idea
+.clinic
 .project
 .classpath
 .c9/
