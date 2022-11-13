@@ -32,6 +32,36 @@ export class AppController {
     `;
   }
 
+  @Get("/promise/")
+  @Header('Content-Type', 'text/plain; charset=UTF-8')
+  @Header('Access-Control-Allow-Origin', '*')
+  getPromise(): string {
+    return `
+      function task(x) { 
+        if (x < 18) 
+          return Promise.resolve('yes');
+        else 
+          return Promise.reject('no');
+    `;
+  }
+
+  @Get("/fetch/")
+  @Header('Access-Control-Allow-Origin', '*')
+  getFetch(): string {
+    return `
+    <html>
+    <input id="inp">
+    <button id="bt" onclick="
+          fetch(document.getElementById('inp').value)
+            .then((response) => response.text())
+            .then(data => document.getElementById('inp').value = data);
+        ">Click</button>
+    </body>
+    
+    </html>
+    `;
+  }
+
   @Get('/author')
   getAuthor(): string {
     return this.appService.getAuthor();
@@ -43,7 +73,7 @@ export class AppController {
   }
 
   @Get('/simple?')
-  getSimplesPage(@Query() query: JSON): string {
+  getSimplePage(@Query() query: JSON): string {
     let n = parseInt(Object.keys(query)[0]);
     let simpleNumbers = this.appService.getSimples(n);
     return `
