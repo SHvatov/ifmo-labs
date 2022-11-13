@@ -14,6 +14,24 @@ export class AppController {
     return this.appService.getAuthorId();
   }
 
+  @Get("/login/")
+  @Header('Content-Type', 'text/plain; charset=UTF-8')
+  @Header('Access-Control-Allow-Origin', '*')
+  getLogin(): string {
+    return this.appService.getAuthorId();
+  }
+
+  @Get("/sample/")
+  @Header('Content-Type', 'text/plain; charset=UTF-8')
+  @Header('Access-Control-Allow-Origin', '*')
+  getSample(): string {
+    return `
+      function task(x) {
+        return x * (this * this)
+      }
+    `;
+  }
+
   @Get('/author')
   getAuthor(): string {
     return this.appService.getAuthor();
