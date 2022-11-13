@@ -1,0 +1,10 @@
+<html>
+<input id="inp">
+<button id="bt" onclick="
+      fetch(document.getElementById('inp').value)
+        .then((response) => response.text())
+        .then(data => document.getElementById('inp').value = data);
+    ">Click</button>
+</body>
+
+</html>
