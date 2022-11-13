@@ -42,6 +42,7 @@ export class AppController {
           return Promise.resolve('yes');
         else 
           return Promise.reject('no');
+      }
     `;
   }
 
