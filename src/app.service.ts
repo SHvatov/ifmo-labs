@@ -3,8 +3,8 @@ import Any = jasmine.Any;
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World1!!1!';
+  getAuthorId(): string {
+    return 'itmo335221';
   }
 
   getAuthor(): string {

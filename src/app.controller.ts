@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Redirect } from '@nestjs/common';
+import { Controller, Get, Query, Redirect, Header } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,9 +7,11 @@ export class AppController {
   }
 
   @Get()
-  @Redirect('/resources', 302)
-  getHello(): string {
-    return this.appService.getHello();
+  // @Redirect('/resources', 302)
+  @Header('X-Author', 'itmo335221')
+  @Header('Access-Control-Allow-Origin', '*')
+  getAuthorId(): string {
+    return this.appService.getAuthorId();
   }
 
   @Get('/author')
