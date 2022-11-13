@@ -1,4 +1,6 @@
-import { Controller, Get, Query, Redirect, Header } from '@nestjs/common';
+import { Controller, Get, Query, Redirect, Header, Req, Post, Body } from '@nestjs/common';
+import { Request } from 'express';
+import * as rawbody from 'raw-body';
 import { AppService } from './app.service';
 
 @Controller()
@@ -62,6 +64,25 @@ export class AppController {
     
     </html>
     `;
+  }
+
+  @Post("/result4/")
+  @Header('Content-Type', 'application/json')
+  @Header('Access-Control-Allow-Origin', '*')
+  @Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
+  @Header("Access-Control-Allow-Headers", "x-test,Content-Typt,Accept,Access-Control-Allow-Headers")
+  async getResult4(@Req() request: Request): Promise<JSON> {
+    const raw = await rawbody(request);
+    const body = raw.toString().trim();
+    const json = `
+    {
+      "message": "itmo335221",
+      "x-result": "${request.headers['x-test']}",
+      "x-body": "${body}"
+    }
+    `;
+    console.log(json);
+    return Promise.resolve(JSON.parse(json));
   }
 
   @Get('/author')
