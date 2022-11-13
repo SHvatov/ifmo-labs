@@ -47,6 +47,7 @@ export class AppController {
 
   @Get("/fetch/")
   @Header('Access-Control-Allow-Origin', '*')
+  @Header('Conent-Type', 'text/html; charset=UTF-8')
   getFetch(): string {
     return `
     <html>
