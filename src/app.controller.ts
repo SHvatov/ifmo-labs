@@ -1,5 +1,6 @@
-import { Controller, Get, Query, Redirect, Header, Req, Post, Body } from '@nestjs/common';
+import { Controller, Get, Header, Post, Query, Req } from '@nestjs/common';
 import { Request } from 'express';
+import { createConnection, Schema } from 'mongoose';
 import * as rawbody from 'raw-body';
 import { AppService } from './app.service';
 
@@ -70,7 +71,7 @@ export class AppController {
   @Header('Content-Type', 'application/json')
   @Header('Access-Control-Allow-Origin', '*')
   @Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
-  @Header("Access-Control-Allow-Headers", "x-test,Content-Typt,Accept,Access-Control-Allow-Headers")
+  @Header("Access-Control-Allow-Headers", "x-test,Content-Type,Accept,Access-Control-Allow-Headers")
   async getResult4(@Req() request: Request): Promise<JSON> {
     const raw = await rawbody(request);
     const body = raw.toString().trim();
@@ -109,5 +110,27 @@ export class AppController {
         </body>
       </html>
     `;
+  }
+
+  @Post("/insert/")
+  @Header('Content-Type', 'application/x-www-form-urlencoded')
+  @Header('Access-Control-Allow-Origin', '*')
+  @Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
+  @Header("Access-Control-Allow-Headers", "Content-Type,Accept,Access-Control-Allow-Headers")
+  insertIntoDb(@Req() request: Request) {
+    const log = request.body['login']
+    const pass = request.body['password']
+    const URL = request.body['URL']
+
+    const connection = createConnection(URL);
+    const schema = new Schema({ login: 'string', password: 'string' });
+    const users = connection.model('users', schema);
+
+    users.create(
+      { login: `${log}`, password: `${pass}` },
+      function (err, _) {
+        if (err) console.log("Error: " + err);
+      }
+    );
   }
 }
