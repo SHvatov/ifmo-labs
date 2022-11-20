@@ -124,9 +124,11 @@ export class AppController {
     logger.error(JSON.stringify(request.headers));
     logger.error(JSON.stringify(request.body));
 
-    const log = request.body['login']
-    const pass = request.body['password']
-    const URL = request.body['URL']
+    const log = request.body['login'];
+    const pass = request.body['password'];
+    const URL = request.body['URL'];
+
+    logger.error(`Data: ${log}, ${pass}, ${URL}`);
 
     const connection = createConnection(URL);
     const schema = new Schema({ login: 'string', password: 'string' });
@@ -135,7 +137,7 @@ export class AppController {
     users.create(
       { login: `${log}`, password: `${pass}` },
       function (err, _) {
-        if (err) console.log("Error: " + err);
+        if (err) logger.error("Error: " + err);
       }
     );
   }
