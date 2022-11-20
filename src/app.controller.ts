@@ -117,7 +117,7 @@ export class AppController {
   @Header('Content-Type', 'application/json')
   @Header('Access-Control-Allow-Origin', '*')
   @Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
-  @Header("Access-Control-Allow-Headers", "Content-Type,Accept,Access-Control-Allow-Headers")
+  @Header("Access-Control-Allow-Headers", "x-test,Content-Type,Accept,Access-Control-Allow-Headers")
   insertIntoDb(@Req() request: Request): any {
     const logger = new ConsoleLogger();
 
