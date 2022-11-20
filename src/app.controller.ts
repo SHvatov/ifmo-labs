@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Post, Query, Req, ConsoleLogger  } from '@nestjs/common';
+import { Controller, Get, Header, Post, Query, Req, ConsoleLogger } from '@nestjs/common';
 import { Request } from 'express';
 import { createConnection, Schema } from 'mongoose';
 import * as rawbody from 'raw-body';
@@ -113,11 +113,12 @@ export class AppController {
   }
 
   @Post("/insert/")
-  @Header('Content-Type', 'application/x-www-form-urlencoded')
+  @Header('Accept', 'application/x-www-form-urlencoded')
+  @Header('Content-Type', 'application/json')
   @Header('Access-Control-Allow-Origin', '*')
   @Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
   @Header("Access-Control-Allow-Headers", "Content-Type,Accept,Access-Control-Allow-Headers")
-  insertIntoDb(@Req() request: Request) {
+  insertIntoDb(@Req() request: Request): any {
     const logger = new ConsoleLogger();
 
     logger.error(JSON.stringify(request.params));
@@ -134,11 +135,12 @@ export class AppController {
     const schema = new Schema({ login: 'string', password: 'string' });
     const users = connection.model('users', schema);
 
-    users.create(
-      { login: `${log}`, password: `${pass}` },
-      function (err, _) {
+    const user = new users({ login: `${log}`, password: `${pass}` });
+    user.save(function (err) {
         if (err) logger.error("Error: " + err);
-      }
-    );
+      });
+
+    logger.error(JSON.stringify(user));
+    return user;
   }
 }
