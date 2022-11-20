@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Post, Query, Req } from '@nestjs/common';
+import { Controller, Get, Header, Post, Query, Req, ConsoleLogger  } from '@nestjs/common';
 import { Request } from 'express';
 import { createConnection, Schema } from 'mongoose';
 import * as rawbody from 'raw-body';
@@ -118,6 +118,12 @@ export class AppController {
   @Header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
   @Header("Access-Control-Allow-Headers", "Content-Type,Accept,Access-Control-Allow-Headers")
   insertIntoDb(@Req() request: Request) {
+    const logger = new ConsoleLogger();
+
+    logger.error(JSON.stringify(request.params));
+    logger.error(JSON.stringify(request.headers));
+    logger.error(JSON.stringify(request.body));
+
     const log = request.body['login']
     const pass = request.body['password']
     const URL = request.body['URL']
